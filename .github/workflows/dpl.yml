@@ -2,11 +2,8 @@ name: Deploy
 
 on:
   push:
-    branches-ignore:
-      - template
-  pull_request:
-    branches-ignore:
-      - template
+    branches:
+      - master 
 
 jobs:
   Deployment:
@@ -17,17 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.7
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7
+        ruby-version: '2.7'
     - name: Install dpl
       run: gem install dpl
-    - name: Install Heroku CLI
-      run: wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
     - name: Deploy to Heroku
       run: dpl --provider=heroku --app=my-django-exercise2 --api-key=a508f948-91f6-45ce-9a6c-7e167315fdc1
-    - name: Run migrations on Heroku
-      run: heroku run --app my-django-exercise2 migrate
     - uses: chrnorm/deployment-action@releases/v1
       name: Create GitHub deployment
       with:
