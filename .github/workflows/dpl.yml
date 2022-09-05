@@ -25,13 +25,13 @@ jobs:
     - name: Install Heroku CLI
       run: wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
     - name: Deploy to Heroku
-      run: dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+      run: dpl --provider=heroku --app=my-django-exercise2 --api-key=a508f948-91f6-45ce-9a6c-7e167315fdc1
     - name: Run migrations on Heroku
-      run: heroku run --app $HEROKU_APP_NAME migrate
+      run: heroku run --app my-django-exercise2 migrate
     - uses: chrnorm/deployment-action@releases/v1
       name: Create GitHub deployment
       with:
         initial_status: success
         token: ${{ github.token }}
-        target_url: https://${{ secrets.HEROKU_APP_NAME }}.herokuapp.com
+        target_url: https://my-django-exercise2.herokuapp.com
         environment: production
