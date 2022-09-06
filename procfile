@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn MyDjangoExercise.wsgi --log-file -
+web: gunicorn my-django-exercise2.wsgi --log-file -
